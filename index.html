@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Interface - Sci-Fi Edition</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Orbitron', sans-serif; /* 科幻字体 */
+            background: linear-gradient(45deg, #0d1b2a, #1b263b); /* 深色渐变背景 */
+            min-height: 100vh;
+            overflow: hidden;
+            color: #e0e0e0;
+        }
+
+        /* 动态背景动画 */
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/dark-mosaic.png');
+            opacity: 0.1;
+            z-index: -1;
+            animation: moveBackground 20s linear infinite;
+        }
+
+        @keyframes moveBackground {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-50px, -50px); }
+        }
+
+        /* 容器样式 */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .agent-box {
+            position: relative;
+            width: 90%;
+            max-width: 1200px;
+            background: rgba(20, 33, 61, 0.8); /* 半透明深蓝色 */
+            border: 2px solid #00d4ff; /* 霓虹蓝边框 */
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.5), inset 0 0 10px rgba(0, 212, 255, 0.2);
+            padding: 20px;
+            backdrop-filter: blur(5px); /* 毛玻璃效果 */
+            animation: float 4s ease-in-out infinite; /* 悬浮动画 */
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* 标题样式 */
+        .title {
+            text-align: center;
+            font-size: 2.5em;
+            color: #00ffcc; /* 霓虹青色 */
+            text-shadow: 0 0 10px rgba(0, 255, 204, 0.8);
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        /* iframe 样式 */
+        .agent-frame {
+            width: 100%;
+            height: 600px;
+            border: none;
+            border-radius: 10px;
+            background: #ffffff; /* iframe 背景 */
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+
+        /* 装饰性元素 */
+        .corner-light {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, #00d4ff, transparent);
+            border-radius: 50%;
+        }
+        .top-left { top: -10px; left: -10px; }
+        .top-right { top: -10px; right: -10px; }
+        .bottom-left { bottom: -10px; left: -10px; }
+        .bottom-right { bottom: -10px; right: -10px; }
+
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .title { font-size: 1.8em; }
+            .agent-box { width: 95%; padding: 15px; }
+            .agent-frame { height: 500px; }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background"></div>
+    <div class="container">
+        <div class="agent-box">
+            <h1 class="title">XuGu AI Assistant</h1>
+            <iframe
+                src="http://192.168.2.223:806/chat/share?shared_id=235799c2f8d511ef90ac0242ac130003&from=agent&auth=JmOWViZGU0ZjhkODExZWZiOTg5MDI0Mm"
+                class="agent-frame"
+            ></iframe>
+            <div class="corner-light top-left"></div>
+            <div class="corner-light top-right"></div>
+            <div class="corner-light bottom-left"></div>
+            <div class="corner-light bottom-right"></div>
+        </div>
+    </div>
+
+    <script>
+        // 添加简单的交互效果（可选）
+        const agentBox = document.querySelector('.agent-box');
+        agentBox.addEventListener('mousemove', (e) => {
+            const rect = agentBox.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            agentBox.style.boxShadow = `0 0 30px rgba(0, 212, 255, 0.5), inset ${x / 50}px ${y / 50}px 10px rgba(0, 212, 255, 0.2)`;
+        });
+        agentBox.addEventListener('mouseleave', () => {
+            agentBox.style.boxShadow = '0 0 30px rgba(0, 212, 255, 0.5), inset 0 0 10px rgba(0, 212, 255, 0.2)';
+        });
+    </script>
+</body>
+</html>
